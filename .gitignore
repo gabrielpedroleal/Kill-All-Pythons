@@ -1,0 +1,14 @@
+# Visual Studio temporaries
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Unity temporaries
+Library/
+Temp/
+Obj/
+Build/
+Logs/
+MemoryCaptures/

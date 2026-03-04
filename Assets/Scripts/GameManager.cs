@@ -4,6 +4,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public UIManager UIManager;
+
     public AudioManager AudioManager;
     public InputManager InputManager { get; private set; }
 

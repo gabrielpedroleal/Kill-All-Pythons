@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private GameObject mainMenuPanel;
 
     [SerializeField] private Button startButton;
     [SerializeField] private Button optionButton;
@@ -12,6 +13,8 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnEnable()
     {
+        mainMenuPanel.SetActive(true);
+        optionsPanel.SetActive(false);
         startButton.onClick.AddListener(GoToGameplayScene);
         optionButton.onClick.AddListener(OpenOptionsMenu);
         exitButton.onClick.AddListener(ExitGame);
@@ -27,6 +30,14 @@ public class MainMenuUI : MonoBehaviour
     {
         GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
         optionsPanel.SetActive(true);
+        mainMenuPanel.SetActive(false);
+    }
+
+    public void CloseOptionsMenu()
+    {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
+        optionsPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
     }
 
     private void ExitGame()

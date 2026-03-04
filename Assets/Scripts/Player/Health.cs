@@ -9,6 +9,11 @@ public class Health : MonoBehaviour
     public event Action OnDead;
     public event Action OnHurt;
 
+    public void GetHealth()
+    {
+
+    }
+
     public void TakeDamage()
     {
         lives--;

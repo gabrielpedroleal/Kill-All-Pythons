@@ -1,7 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI keysText;
+    [SerializeField] private TextMeshProUGUI healthText;
+
     [SerializeField] private GameObject OptionsPanel;
     [SerializeField] private GameObject PausePanel;
 
@@ -44,5 +48,15 @@ public class UIManager : MonoBehaviour
     {
         OptionsPanel.SetActive(false);
         PausePanel.SetActive(true);
+    }
+
+    public void UpdateKeysLefText(int totalValue, int leftValue)
+    {
+        keysText.text = $"{leftValue}/{totalValue}";
+    }
+
+    public void UptadeHealthLeftText(int totalValue, int leftValue) 
+    {
+        healthText.text = $"{leftValue}/{totalValue}";
     }
 }

@@ -25,7 +25,7 @@ public class PlayerBehavior : MonoBehaviour
         health = GetComponent<Health>();
 
         health.OnDead += HandlePlayerDeath;
-        health.OnHurt += PlayerHurtSound;
+        health.OnHurt += PlayerHurt;
     }
 
     private void Start()
@@ -75,7 +75,7 @@ public class PlayerBehavior : MonoBehaviour
         rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    private void PlayerHurtSound()
+    private void PlayerHurt()
     {
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerHurt);
     }

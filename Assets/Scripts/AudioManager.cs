@@ -13,6 +13,8 @@ public enum SFX
     EnemyAttack,
     EnemyHurt,
     EnemyDeath,
+    ButtonClick,
+    
 }
 
 [Serializable] struct SFXConfig

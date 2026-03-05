@@ -41,4 +41,10 @@ public class GameManager : MonoBehaviour
             Destroy(bossDoor);
         }
     }
+
+    public void UpdateHealth(int amount)
+    {
+        UIManager.UptadeHealthLeftText(amount);
+    }
+
 }

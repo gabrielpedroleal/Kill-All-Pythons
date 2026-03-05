@@ -9,13 +9,11 @@ public class Health : MonoBehaviour
     public event Action OnDead;
     public event Action OnHurt;
 
-    public void GetHealth()
-    {
-
-    }
+    public bool IsDead => isDead;
 
     public void TakeDamage()
     {
+        if (IsDead) return;
         lives--;
         HandleDamageTaken();
     }
@@ -25,6 +23,7 @@ public class Health : MonoBehaviour
         if (isDead) return;
         if (lives <= 0)
         {
+            isDead = true;
             OnDead?.Invoke();
         }
         else
@@ -32,4 +31,7 @@ public class Health : MonoBehaviour
             OnHurt?.Invoke();
         }
     }
+
+    public int GetHealth() => lives;
+
 }

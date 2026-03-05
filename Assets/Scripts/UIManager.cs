@@ -55,8 +55,8 @@ public class UIManager : MonoBehaviour
         keysText.text = $"{leftValue}/{totalValue}";
     }
 
-    public void UptadeHealthLeftText(int totalValue, int leftValue) 
+    public void UptadeHealthLeftText(int amount) 
     {
-        healthText.text = $"{leftValue}/{totalValue}";
+        healthText.text = $"{amount}";
     }
 }

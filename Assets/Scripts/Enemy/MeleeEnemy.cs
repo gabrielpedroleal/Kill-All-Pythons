@@ -16,7 +16,7 @@ public class MeleeEnemy : BaseEnemy
     {
         base.Awake();
         base.enemyHealth.OnHurt += PlayHurtAudio;
-        base.enemyHealth.OnDead += PlayDeadAudio;
+        base.enemyHealth.OnDead += PlayDeadAudioAndRemoveCollider;
       
     }
 
@@ -25,9 +25,10 @@ public class MeleeEnemy : BaseEnemy
         GameManager.Instance.AudioManager.PlaySFX(SFX.EnemyHurt);
     }
 
-    private void PlayDeadAudio()
+    private void PlayDeadAudioAndRemoveCollider()
     {
         GameManager.Instance.AudioManager.PlaySFX(SFX.EnemyDeath);
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 
     protected override void Update()
@@ -40,6 +41,7 @@ public class MeleeEnemy : BaseEnemy
 
     private void VerifyCanAttack()
     {
+        if (isDead) return;
         if (cooldownTimer < attackCooldown) return;
         if (PlayerInSight())
         {
@@ -50,6 +52,7 @@ public class MeleeEnemy : BaseEnemy
 
     private void AttackPlayer()
     {
+        if(isDead) return;
         GameManager.Instance.AudioManager.PlaySFX(SFX.EnemyAttack);
 
         cooldownTimer = 0;

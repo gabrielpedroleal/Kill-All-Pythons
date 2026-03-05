@@ -10,6 +10,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private Transform attackPosition;
     [SerializeField] private LayerMask attackLayer;
+    [SerializeField] private ParticleSystem hitParticle;
 
     private Rigidbody2D rigidbody;
     private IsGroundedChecker isGroundedChecker;
@@ -25,7 +26,7 @@ public class PlayerBehavior : MonoBehaviour
         health = GetComponent<Health>();
 
         health.OnDead += HandlePlayerDeath;
-        health.OnHurt += PlayerHurt;
+        health.OnHurt += HandleHurt;
     }
 
     private void Start()
@@ -75,17 +76,26 @@ public class PlayerBehavior : MonoBehaviour
         rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
-    private void PlayerHurt()
+    private void HandleHurt()
     {
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerHurt);
+        PlayHitParticle();
+        UpdateHealth(health.GetHealth());
+        
     }
 
     private void HandlePlayerDeath()
     {
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerDeath);
+        PlayHitParticle();
         GetComponent<Collider2D>().enabled = false;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
         GameManager.Instance.InputManager.DisablePlayerGameplayInput();
+    }
+
+    private void UpdateHealth(int amount)
+    {
+        GameManager.Instance.UpdateHealth(amount);
     }
 
     private void PlayWalkSound()
@@ -105,10 +115,17 @@ public class PlayerBehavior : MonoBehaviour
             print("Cheking enemy");
             if(hittedEnemy.TryGetComponent(out Health enemyHealth))
             {
+                if (enemyHealth.IsDead) continue;
                 print("Getting damage");
                 enemyHealth.TakeDamage();
             }
         }
+    }
+
+    private void PlayHitParticle()
+    {
+        ParticleSystem instantiatedParticle = Instantiate(hitParticle, transform.position, transform.rotation);
+        instantiatedParticle.Play();
     }
 
     private void OnDrawGizmos()

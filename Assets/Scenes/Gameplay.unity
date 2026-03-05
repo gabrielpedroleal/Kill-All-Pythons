@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 17795493}
   - component: {fileID: 17795495}
   - component: {fileID: 17795494}
+  - component: {fileID: 17795496}
   m_Layer: 0
   m_Name: BossDoor
   m_TagString: Untagged
@@ -308,6 +309,52 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!61 &17795496
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17795492}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 34.498005, y: 3.4991858}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.0545273, y: 3.0445466}
+  m_EdgeRadius: 0
 --- !u!1 &62913679
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -90.167, y: 0.000025749}
+  m_AnchoredPosition: {x: -52.3, y: 0.000025749}
   m_SizeDelta: {x: 71.0325, y: 71.0325}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &64770222
@@ -6581,7 +6628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 37, y: 0}
+  m_AnchoredPosition: {x: 76.3, y: 0}
   m_SizeDelta: {x: 91.68671, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &736921976
@@ -6612,7 +6659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0/0
+  m_text: 6
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 54665f1e425bc3449b28c48111d31b38, type: 2}
   m_sharedMaterial: {fileID: 5386230307768099789, guid: 54665f1e425bc3449b28c48111d31b38, type: 2}
@@ -7025,6 +7072,7 @@ MonoBehaviour:
   attackLayer:
     serializedVersion: 2
     m_Bits: 256
+  hitParticle: {fileID: 8771972552311404798, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
 --- !u!212 &986795343
 SpriteRenderer:
   serializedVersion: 2
@@ -8210,7 +8258,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -380, y: -76.49072}
+  m_AnchoredPosition: {x: -308.6, y: -76.49072}
   m_SizeDelta: {x: 251.36646, y: 152.98132}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1453932890
@@ -8589,8 +8637,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -128, y: -76.49072}
-  m_SizeDelta: {x: 251.36646, y: 152.98132}
+  m_AnchoredPosition: {x: -92.38977, y: -76.49072}
+  m_SizeDelta: {x: 180.146, y: 152.9813}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1594942469
 MonoBehaviour:

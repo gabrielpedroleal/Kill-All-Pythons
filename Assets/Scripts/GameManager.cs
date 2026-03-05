@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public InputManager InputManager { get; private set; }
 
     [SerializeField] private GameObject bossDoor;
+    [SerializeField] private PlayerBehavior player;
 
     private int totalKeys;
     private int keysLeftToCollect;
@@ -47,4 +48,5 @@ public class GameManager : MonoBehaviour
         UIManager.UptadeHealthLeftText(amount);
     }
 
+    public PlayerBehavior GetPlayer() => player;
 }

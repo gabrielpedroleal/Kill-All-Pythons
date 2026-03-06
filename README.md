@@ -21,19 +21,19 @@ In "Kill All Pythons", players take on the role of a solo brave space snake hero
 🕹️ How to Play
 
 1. Download this repository and use the .exe file in the "Build" folder to play the game.
-2. 
+   
 3. Use the left ⬅️ and right ➡️ arrow keys to move your character, the spacebar to jump, and Z to attack.
-4. 
+   
 5. You can jump on enemies to bouce and damage them, but be careful not to get hit!
-6. 
+   
 7. Collect all the keys to open the door and face the Python Boss.
 
 🛠️ Project Arquitecture
 
 * GameManager : Manages game state, key collection, and transitions between scenes.
-* 
+  
 * AudioManager : Handles all audio playback and volume control.
-* 
+  
 * UiManager: Manages UI elements, including the pause menu, options panel, and game over/victory screens.
 
 ------ Thanks for checking out my project! ------ 

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,9 +15,12 @@ public class BossBehavior : MonoBehaviour
     [SerializeField] private float attackSize = 1f;
     [SerializeField] private Vector3 attackOffSet;
     [SerializeField] private LayerMask attackMask;
+    [SerializeField] private float attackCooldown = 1f;
+    private float attackCooldownTimer = Mathf.Infinity;
 
     private Vector3 attackPosition;
 
+    
     private bool canAttack = false;
     private bool isFlipped = false;
 
@@ -35,6 +39,11 @@ public class BossBehavior : MonoBehaviour
         playerPosition = GameManager.Instance.GetPlayer().transform;
     }
 
+    private void Update()
+    {
+        attackCooldownTimer += Time.deltaTime;
+    }
+
     private void HandleHurt()
     {
         animator.SetTrigger("hurt");
@@ -44,8 +53,16 @@ public class BossBehavior : MonoBehaviour
 
     private void HandleDeath()
     {
-        animator.SetTrigger("death");
+        animator.SetTrigger("dead");
+        GameManager.Instance.AudioManager.PlaySFX(SFX.EnemyDeath);
         GetComponent<BoxCollider2D>().enabled = false;
+        StartCoroutine(DestroyEnemy(2));
+    }
+
+    private IEnumerator DestroyEnemy(int time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(this.gameObject);
     }
 
     public void FollowPlayer()
@@ -90,6 +107,11 @@ public class BossBehavior : MonoBehaviour
 
     private void Attack()
     {
+        if (attackCooldownTimer < attackCooldown) return;
+
+        attackCooldownTimer = 0f;
+        GameManager.Instance.AudioManager.PlaySFX(SFX.EnemyAttack);
+
         attackPosition = transform.position;
         attackPosition += transform.right * attackOffSet.x;
         attackPosition += transform.up * attackOffSet.y;
@@ -102,7 +124,12 @@ public class BossBehavior : MonoBehaviour
 
     }
 
-    public bool GetCanAttack() => canAttack;
+    public void StartChasing()
+    {
+        animator.SetBool("canChase", true);
+    }
+
+    public bool GetCanAttack() => canAttack && attackCooldownTimer >= attackCooldown;
 
     private void OnDrawGizmos()
     {

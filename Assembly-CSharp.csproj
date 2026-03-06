@@ -59,9 +59,12 @@
     <Compile Include="Assets\Scripts\Player\Health.cs" />
     <Compile Include="Assets\Scripts\Input\InputManager.cs" />
     <Compile Include="Assets\Scripts\Enemy\MeleeEnemy.cs" />
+    <Compile Include="Assets\Scripts\CredtisBehavior.cs" />
     <Compile Include="Assets\Scripts\Enemy\Boss\BossBehavior.cs" />
     <Compile Include="Assets\Scripts\UI\PauseUI.cs" />
+    <Compile Include="Assets\Scripts\BossFightTrigger.cs" />
     <Compile Include="Assets\Scripts\Player\IsGroundedChecker.cs" />
+    <Compile Include="Assets\Scripts\UI\GameOverUI.cs" />
     <Compile Include="Assets\Scripts\UI\MainMenuUI.cs" />
     <Compile Include="Assets\Scripts\Enemy\BaseEnemy.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAnim.cs" />

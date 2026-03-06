@@ -16,7 +16,7 @@ public class BossWalk : StateMachineBehaviour
         if (bossBehavior.GetCanAttack() == true)
         {
             animator.SetTrigger("attack");
-        }
+        }   
     }
 
     

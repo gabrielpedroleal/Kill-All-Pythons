@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject bossDoor;
     [SerializeField] private PlayerBehavior player;
+    [SerializeField] private BossBehavior boss;
+    [SerializeField] private BossFightTrigger bossFightTrigger;
 
     private int totalKeys;
     private int keysLeftToCollect;
@@ -25,9 +29,14 @@ public class GameManager : MonoBehaviour
 
         totalKeys = FindObjectsOfType<CollectableKey>().Length;
         keysLeftToCollect = totalKeys;
-        UIManager.UpdateKeysLefText(totalKeys, keysLeftToCollect);  
+        UIManager.UpdateKeysLefText(totalKeys, keysLeftToCollect);
+        bossFightTrigger.OnPlayerEnteredBossFight += ActivateBossBehavior;
+
+        player.GetComponent<Health>().OnDead += HandleGameOver;
+        boss.GetComponent<Health>().OnDead += HandleVictory;
     }
-    
+
+
     public void UpdateKeysLeft()
     {
         keysLeftToCollect--;
@@ -41,6 +50,28 @@ public class GameManager : MonoBehaviour
         {
             Destroy(bossDoor);
         }
+    }
+
+    private void HandleGameOver()
+    {
+        UIManager.OpenGameOverPanel();
+    }
+
+    private void HandleVictory()
+    {
+       UIManager.OpenVictoryText();
+        StartCoroutine(GoToCreditsScene());
+    }
+
+    private IEnumerator GoToCreditsScene()
+    {
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("Credits");
+    }
+
+    private void ActivateBossBehavior()
+    {
+        boss.StartChasing();
     }
 
     public void UpdateHealth(int amount)

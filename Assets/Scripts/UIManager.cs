@@ -5,14 +5,18 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI keysText;
     [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI victoryText;
 
     [SerializeField] private GameObject OptionsPanel;
     [SerializeField] private GameObject PausePanel;
+    [SerializeField] private GameObject GameOverPanel;
 
     private void Awake()
     {
         OptionsPanel.SetActive(false);
         PausePanel.SetActive(false);
+         GameOverPanel.SetActive(false);
+        victoryText.gameObject.SetActive(false);
 
     }
 
@@ -42,6 +46,16 @@ public class UIManager : MonoBehaviour
     {
        OptionsPanel.SetActive(true);
        PausePanel.SetActive(false);
+    }
+
+    public void OpenGameOverPanel()
+    {
+        GameOverPanel.SetActive(true);
+    }
+
+    public void OpenVictoryText()
+    {
+        victoryText.gameObject.SetActive(true);
     }
 
     public void CloseOptionPanel() 

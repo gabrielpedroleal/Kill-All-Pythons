@@ -12,11 +12,15 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private LayerMask attackLayer;
     [SerializeField] private ParticleSystem hitParticle;
 
+    [SerializeField] private float stompBounce = 4f;
+
     private Rigidbody2D rigidbody;
     private IsGroundedChecker isGroundedChecker;
     private float moveDirection;
     private Health health;
     private Vector3 initialScale;
+
+    private Collider2D lastStompedCollider;
 
     private void Awake()
     {
@@ -126,6 +130,33 @@ public class PlayerBehavior : MonoBehaviour
     {
         ParticleSystem instantiatedParticle = Instantiate(hitParticle, transform.position, transform.rotation);
         instantiatedParticle.Play();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (contact.normal.y > 0.5f && rigidbody.linearVelocity.y <= 0f)
+            {
+                if (collision.collider.TryGetComponent(out Health enemyHealth))
+                {
+                    if (!enemyHealth.IsDead && collision.collider != lastStompedCollider)
+                    {
+                        enemyHealth.TakeDamage();
+                        lastStompedCollider = collision.collider;
+                        rigidbody.linearVelocity = new Vector2(rigidbody.linearVelocity.x, 0f);
+                        rigidbody.AddForce(Vector2.up * stompBounce, ForceMode2D.Impulse);
+                        
+                        GameManager.Instance.AudioManager.PlaySFX(SFX.EnemyHurt);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                lastStompedCollider = null;
+            }
+        }
     }
 
     private void OnDrawGizmos()
